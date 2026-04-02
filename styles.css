@@ -2,7 +2,7 @@
 .cm-editor:before {
 	content: '';
 	background-blend-mode: overlay;
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-position: var(--obsidian-editor-background-position);
 	background-size: var(--obsidian-editor-background-image-size);
 	width: 100%;
