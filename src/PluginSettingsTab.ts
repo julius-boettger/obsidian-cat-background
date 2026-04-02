@@ -125,7 +125,7 @@ export class SettingsTab extends PluginSettingTab {
 						);
 						const inputEl = text.inputEl;
 
-						// Only update settings when user clicks off (to avoid cluttering with notices + performance)
+						// update settings when user clicks off
 						inputEl.addEventListener('blur', async () => {
 							const value = text.getValue().trim();
 							this.plugin.settings.imageLocation = value;
@@ -140,7 +140,7 @@ export class SettingsTab extends PluginSettingTab {
 						text.setPlaceholder('https://example.com/image.png');
 						text.setValue(this.plugin.settings.imageLocation);
 
-						// Only update settings when user clicks off (to avoid cluttering with notices + performance)
+						// update settings when user clicks off
 						text.inputEl.addEventListener('blur', async () => {
 							const value = text.getValue().trim();
 							this.plugin.settings.imageLocation = value;
@@ -161,6 +161,7 @@ export class SettingsTab extends PluginSettingTab {
 				).setValue(
 					`${this.plugin.settings.imageSize}`,
 				);
+				// update settings when user clicks off
 				text.inputEl.addEventListener('blur', async () => {
 					const value = Number(text.getValue());
 					if (value >= 0) {
@@ -189,6 +190,7 @@ export class SettingsTab extends PluginSettingTab {
 				).setValue(
 					`${this.floatToPercent(this.plugin.settings.opacity)}`,
 				);
+				// update settings when user clicks off
 				text.inputEl.addEventListener('blur', async () => {
 					const float = this.percentToFloat(Number(text.getValue()));
 					this.plugin.settings.opacity = float;
