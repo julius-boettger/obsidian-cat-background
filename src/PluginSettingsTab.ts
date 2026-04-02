@@ -15,6 +15,13 @@ const positionOptions = {
 	left: 'left',
 };
 
+const catOptions = {
+	face: 'face',
+	silhouette: 'silhouette',
+	stretching: 'stretching',
+	custom: 'custom',
+};
+
 export class SettingsTab extends PluginSettingTab {
 	plugin: BackgroundPlugin;
 
@@ -52,62 +59,84 @@ export class SettingsTab extends PluginSettingTab {
 		reportIssue.style.marginTop = '5px';
 		reportIssue.style.marginBottom = '10px'; // add some margin
 
-		// setting for local images
 		new Setting(containerEl)
-			.setName('Use local image')
-			.setDesc('Use a local file path instead of a remote URL.')
-			.addToggle((toggle) => {
-				toggle
-					.setValue(this.plugin.settings.useLocal)
+			.setName('Cat')
+			.setDesc('Which cat to use as the background image.')
+			.addDropdown((dropdown) => {
+				Object.entries(catOptions).forEach(([key, value]) =>
+					dropdown.addOption(key, value),
+				);
+				dropdown
+					.setValue(this.plugin.settings.cat)
 					.onChange(async (value) => {
-						this.plugin.settings.useLocal = value;
+						this.plugin.settings.cat = value;
 						await this.plugin.saveSettings();
-						this.display();
+						this.display(); // for potentially adjusted settings
 					});
 			});
 
-		// render local path settings OR remote url settings
-		if (this.plugin.settings.useLocal) {
+		if (this.plugin.settings.cat == catOptions.custom) {
+			// setting for local images
 			new Setting(containerEl)
-				.setName('Path to image')
-				.setDesc(
-					createFragment((frag) => {
-						frag.appendText('Local path to image (');
-						frag.createEl('strong', {
-							text: 'must be in vault',
+				.setName('Use local image')
+				.setDesc('Use a local file path instead of a remote URL.')
+				.addToggle((toggle) => {
+					toggle
+						.setValue(this.plugin.settings.useLocal)
+						.onChange(async (value) => {
+							this.plugin.settings.useLocal = value;
+							await this.plugin.saveSettings();
+							this.display();
 						});
-						frag.appendText(')');
-					}),
-				)
-				.addText((text) => {
-					text.setPlaceholder('path/to/background.png').setValue(
-						this.plugin.settings.imageLocation,
-					);
-					const inputEl = text.inputEl;
-
-					// Only update settings when user clicks off (to avoid cluttering with notices + performance)
-					inputEl.addEventListener('blur', async () => {
-						const value = text.getValue().trim();
-						this.plugin.settings.imageLocation = value;
-						await this.plugin.saveSettings();
-					});
 				});
+
+			// render local path settings OR remote url settings
+			if (this.plugin.settings.useLocal) {
+				new Setting(containerEl)
+					.setName('Path to image')
+					.setDesc(
+						createFragment((frag) => {
+							frag.appendText('Local path to image (');
+							frag.createEl('strong', {
+								text: 'must be in vault',
+							});
+							frag.appendText(')');
+						}),
+					)
+					.addText((text) => {
+						text.setPlaceholder('path/to/background.png').setValue(
+							this.plugin.settings.imageLocation,
+						);
+						const inputEl = text.inputEl;
+
+						// Only update settings when user clicks off (to avoid cluttering with notices + performance)
+						inputEl.addEventListener('blur', async () => {
+							const value = text.getValue().trim();
+							this.plugin.settings.imageLocation = value;
+							await this.plugin.saveSettings();
+						});
+					});
+			} else {
+				new Setting(containerEl)
+					.setName('Background Image URL')
+					.setDesc('URL for the background image to load.')
+					.addText((text) => {
+						text.setPlaceholder('https://example.com/image.png');
+						text.setValue(this.plugin.settings.imageLocation);
+
+						// Only update settings when user clicks off (to avoid cluttering with notices + performance)
+						text.inputEl.addEventListener('blur', async () => {
+							const value = text.getValue().trim();
+							this.plugin.settings.imageLocation = value;
+							await this.plugin.saveSettings();
+						});
+					});
+			}
 		} else {
-			new Setting(containerEl)
-				.setName('Background Image URL')
-				.setDesc('URL for the background image to load.')
-				.addText((text) => {
-					text.setPlaceholder('https://example.com/image.png');
-					text.setValue(this.plugin.settings.imageLocation);
-
-					// Only update settings when user clicks off (to avoid cluttering with notices + performance)
-					text.inputEl.addEventListener('blur', async () => {
-						const value = text.getValue().trim();
-						this.plugin.settings.imageLocation = value;
-						await this.plugin.saveSettings();
-					});
-				});
+			// TODO: handle static paths to preconfigured cats
+			//switch (this.plugin.settings.cat) {}
 		}
+
 
 		new Setting(containerEl)
 			.setName('Image Size')

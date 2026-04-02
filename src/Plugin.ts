@@ -4,6 +4,7 @@ import { resolveLocal, resolveRemote, URLResult } from './Validation';
 import { Notice } from 'obsidian';
 
 interface PluginSettings {
+	cat: string, // cat to use as background image
 	useLocal: boolean; // whether to use local file (true) or remote URL
 	imageLocation: string; // path to file or URL
 	imageSize: number; // in percent
@@ -14,6 +15,7 @@ interface PluginSettings {
 }
 
 export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
+	cat: "face",
 	useLocal: false,
 	imageLocation: '',
 	opacity: 0.3,
