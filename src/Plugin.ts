@@ -59,6 +59,7 @@ export default class BackgroundPlugin extends Plugin {
 
 		const doc = document;
 		doc.body.style.removeProperty('--obsidian-editor-background-image');
+		doc.body.style.removeProperty('--obsidian-editor-background-image-size');
 		doc.body.style.removeProperty('--obsidian-editor-background-opacity');
 		doc.body.style.removeProperty('--obsidian-editor-background-bluriness');
 		doc.body.style.removeProperty(
@@ -123,6 +124,10 @@ export default class BackgroundPlugin extends Plugin {
 		doc.body.style.setProperty(
 			'--obsidian-editor-background-image',
 			`url("${result.location}")`,
+		);
+		doc.body.style.setProperty(
+			'--obsidian-editor-background-image-size',
+			'10%', // TODO: add setting for this
 		);
 		doc.body.style.setProperty(
 			'--obsidian-editor-background-opacity',
