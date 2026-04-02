@@ -1,3 +1,6 @@
+# direnv
+.direnv
+
 # vscode
 .vscode
 
@@ -23,10 +26,3 @@ data.json
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
-
-# environment
-.env
-.env.local
-
-# TODO
-todo.txt
