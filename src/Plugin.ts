@@ -84,11 +84,7 @@ export default class BackgroundPlugin extends Plugin {
 		const locChanged =
 			result.location !== (this.prevResult?.location ?? null);
 
-		if (result.location && locChanged) {
-			new Notice(
-				`Obsidian Background Image: Loaded background ${this.settings.imageLocation.trim()}`,
-			);
-		} else if (result.error && (errorChanged || locChanged)) {
+		if (result.error && (errorChanged || locChanged)) {
 			new Notice(`Obsidian Background Image: ${result.error}`);
 		}
 	}
