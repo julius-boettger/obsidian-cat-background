@@ -5,7 +5,7 @@ import { Notice } from 'obsidian';
 
 interface PluginSettings {
 	cat: string, // cat to use as background image
-	useLocal: boolean; // whether to use local file (true) or remote URL
+	localImageLocation: boolean; // whether to use local file (true) or remote URL
 	imageLocation: string; // path to file or URL
 	imageSize: number; // in percent
 	opacity: number;
@@ -16,7 +16,7 @@ interface PluginSettings {
 
 export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	cat: "face",
-	useLocal: false,
+	localImageLocation: false,
 	imageLocation: '',
 	opacity: 0.3,
 	imageSize: 10,
@@ -85,17 +85,17 @@ export default class BackgroundPlugin extends Plugin {
 			result.location !== (this.prevResult?.location ?? null);
 
 		if (result.error && (errorChanged || locChanged)) {
-			new Notice(`Obsidian Background Image: ${result.error}`);
+			new Notice(`Cat Background: ${result.error}`);
 		}
 	}
 
 	private async resolveImage(): Promise<URLResult> {
 		const loc = (this.settings.imageLocation ?? '').trim();
 		if (!loc) {
-			return { location: null, error: 'Background location is empty' };
+			return { location: null, error: 'Cat image location is empty' };
 		}
 
-		if (this.settings.useLocal) {
+		if (this.settings.localImageLocation) {
 			// local image
 			return resolveLocal(this.app, loc);
 		}

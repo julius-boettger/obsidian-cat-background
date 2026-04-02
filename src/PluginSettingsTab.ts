@@ -34,30 +34,12 @@ export class SettingsTab extends PluginSettingTab {
 		const { containerEl } = this;
 
 		containerEl.empty();
-		containerEl.createEl('h1', { text: 'Background Image' }); // Heading
+		containerEl.createEl('h1', { text: 'Cat Background' }); // Heading
 
 		const instructions = containerEl.createEl('div');
 		instructions.createEl('p', {
-			text: "Local images must be stored in the Obsidian vault (as otherwise they won't be rendered on mobile).",
+			text: "Local cat background images must be stored in the Obsidian vault.",
 		});
-		instructions.createEl('p', {
-			text: 'The other settings, like opacity, bluriness, and input contrast, are helpers to tweak your experience.',
-		});
-
-		const extensions = instructions.createDiv();
-		extensions.createEl('strong', { text: 'Supported Image Formats: ' });
-		extensions.appendText(
-			'PNG, JPG/JPEG, GIF (including animated), WebP, and SVG. ',
-		);
-		// extensions.style.marginBottom = '10px';
-
-		const reportIssue = instructions.createEl('a', {
-			href: 'https://github.com/shmolf/obsidian-editor-background/issues',
-			text: 'Submit an issue',
-		});
-		reportIssue.style.display = 'block';
-		reportIssue.style.marginTop = '5px';
-		reportIssue.style.marginBottom = '10px'; // add some margin
 
 		new Setting(containerEl)
 			.setName('Cat')
@@ -94,31 +76,24 @@ export class SettingsTab extends PluginSettingTab {
 		if (this.plugin.settings.cat == catOptions.custom) {
 			// setting for local images
 			new Setting(containerEl)
-				.setName('Use local image')
-				.setDesc('Use a local file path instead of a remote URL.')
+				.setName('Use local cat image')
+				.setDesc('Use a cat image from your Obsidian vault instead of a link to a cat.')
 				.addToggle((toggle) => {
 					toggle
-						.setValue(this.plugin.settings.useLocal)
+						.setValue(this.plugin.settings.localImageLocation)
 						.onChange(async (value) => {
-							this.plugin.settings.useLocal = value;
+							this.plugin.settings.localImageLocation = value;
 							await this.plugin.saveSettings();
 							this.display();
 						});
 				});
 
 			// render local path settings OR remote url settings
-			if (this.plugin.settings.useLocal) {
+			const FILE_TYPES_TEXT = "Supported Image formats are PNG, JPG/JPEG, GIF (including animated), WEBP, and SVG.";
+			if (this.plugin.settings.localImageLocation) {
 				new Setting(containerEl)
-					.setName('Path to image')
-					.setDesc(
-						createFragment((frag) => {
-							frag.appendText('Local path to image (');
-							frag.createEl('strong', {
-								text: 'must be in vault',
-							});
-							frag.appendText(')');
-						}),
-					)
+					.setName('Path to local cat image')
+					.setDesc('Image must be in your Obsidian vault.\n' + FILE_TYPES_TEXT)
 					.addText((text) => {
 						text.setPlaceholder('path/to/background.png').setValue(
 							this.plugin.settings.imageLocation,
@@ -134,10 +109,10 @@ export class SettingsTab extends PluginSettingTab {
 					});
 			} else {
 				new Setting(containerEl)
-					.setName('Background Image URL')
-					.setDesc('URL for the background image to load.')
+					.setName('Link to cat image')
+					.setDesc(FILE_TYPES_TEXT)
 					.addText((text) => {
-						text.setPlaceholder('https://example.com/image.png');
+						text.setPlaceholder('https://example.com/cat.png');
 						text.setValue(this.plugin.settings.imageLocation);
 
 						// update settings when user clicks off
@@ -151,9 +126,9 @@ export class SettingsTab extends PluginSettingTab {
 		}
 
 		new Setting(containerEl)
-			.setName('Image Size')
+			.setName('Cat Size')
 			.setDesc(
-				'Size of the background image in percent. Values like 0.5 are also possible.',
+				'Size of cat(s) in percent. Values like 0.5 are also possible.',
 			)
 			.addText((text) => {
 				text.setPlaceholder(
@@ -169,20 +144,20 @@ export class SettingsTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					} else if (value < 0) {
 						new Notice(
-							`Obsidian Background Image: Error: Image size ${value} is negative, it has to be positive`,
+							`Cat Background: Error: Cat size ${value} is negative, it has to be positive`,
 						);
 					} else {
 						new Notice(
-							`Obsidian Background Image: Error: Image size "${value}" is not a number`,
+							`Cat Background: Error: Cat size "${value}" is not a number`,
 						);
 					}
 				});
 			});
 
 		new Setting(containerEl)
-			.setName('Background Opacity')
+			.setName('Cat Opacity')
 			.setDesc(
-				'Opacity of the background image should be between 0% and 100%.',
+				'Opacity of cat(s) in percent. Values like 0.5 are also possible.',
 			)
 			.addText((text) => {
 				text.setPlaceholder(
@@ -199,8 +174,8 @@ export class SettingsTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName('Image Bluriness')
-			.setDesc('Increasing the blur can help make the text more legible.')
+			.setName('Cat Bluriness')
+			.setDesc('Blurring your cat(s) may improve legibility.')
 			.addDropdown((dropdown) => {
 				dropdown
 					.addOption(blurLevels.off, 'Off')
@@ -214,15 +189,12 @@ export class SettingsTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName('Input Area Contrast Background')
+			.setName('Note-taking Area Contrast Background')
 			.setDesc(
-				'This adds a translucent background for the input area, to help improve legibility.',
+				'Adding a translucent background to the note-taking area may improve legibility.',
 			)
 			.addToggle((toggle) => {
 				toggle
-					.setTooltip(
-						'Enable to increase the contrast of the input area.',
-					)
 					.setValue(this.plugin.settings.inputContrast)
 					.onChange(async (value) => {
 						this.plugin.settings.inputContrast = value;
@@ -231,9 +203,9 @@ export class SettingsTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName('Image Position')
+			.setName('Cat Alignment')
 			.setDesc(
-				'Reposition the image in cases where the focus is not centered.',
+				"How to align your cat(s). Probably doesn't do much.",
 			)
 			.addDropdown((dropdown) => {
 				Object.entries(positionOptions).forEach(([key, value]) =>

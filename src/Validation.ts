@@ -68,7 +68,7 @@ export const resolveRemote = async (link: string): Promise<URLResult> => {
 	try {
 		new URL(url);
 	} catch {
-		return ERR(`Invalid URL ${url}`);
+		return ERR(`Invalid link ${url}`);
 	}
 
 	let response;
@@ -79,7 +79,7 @@ export const resolveRemote = async (link: string): Promise<URLResult> => {
 			headers: { Range: 'bytes=0-2047' },
 		});
 	} catch (e) {
-		return ERR(`Failed to fetch URL ${url} (${e?.message ?? String(e)})`);
+		return ERR(`Failed to load link ${url} (${e?.message ?? String(e)})`);
 	}
 
 	// get MIME content type
@@ -89,7 +89,7 @@ export const resolveRemote = async (link: string): Promise<URLResult> => {
 	// validate image content-type
 	if (!contentType || !contentType.toLowerCase().startsWith('image/')) {
 		return ERR(
-			`URL is not an Image (Content-Type: ${contentType ?? 'unknown'})`,
+			`Link is not an image (Content-Type: ${contentType ?? 'unknown'})`,
 		);
 	}
 
