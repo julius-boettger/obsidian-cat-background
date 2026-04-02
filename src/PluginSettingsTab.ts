@@ -70,6 +70,22 @@ export class SettingsTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.cat)
 					.onChange(async (value) => {
 						this.plugin.settings.cat = value;
+						if (value != catOptions.custom) {
+							// TODO: handle static paths to preconfigured cats
+							let filename;
+							switch (this.plugin.settings.cat) {
+								case "face":
+									filename = "face-lines";
+									break;
+								case "silhouette":
+									filename = "silhouette-filled";
+									break;
+								case "stretching":
+									filename = "stretching-lines";
+									break;
+							}
+							this.plugin.settings.imageLocation = `.obsidian/plugins/obsidian/cats/${filename}.svg`;
+						}
 						await this.plugin.saveSettings();
 						this.display(); // for potentially adjusted settings
 					});
@@ -132,11 +148,7 @@ export class SettingsTab extends PluginSettingTab {
 						});
 					});
 			}
-		} else {
-			// TODO: handle static paths to preconfigured cats
-			//switch (this.plugin.settings.cat) {}
 		}
-
 
 		new Setting(containerEl)
 			.setName('Image Size')
