@@ -1,24 +1,17 @@
-# Obsidian Editor Background Plugin
+# Cat Background for [Obsidian](https://obsidian.md/)
 
-This plugin is meant to provide an aesthetic background for the Editor view of Obsidian.
+### Have some cats on your Obsidian (editor view) background!
 
-As part of the settings, there's additional tweaking that's available, like modifying the
-bluriness of the background, and the contrast of the input area.
+You can choose between a few shipped cats or even a custom cat image of your choice.
 
-I use animated gifs as my background, particularly ones by [waneella](https://waneella.com/).
+> Using the "custom" cat option, you could even choose an image without a cat 🤯 (but that's not intended)
 
-## Settings Menu
+## Examples
 
-![Settings](screenshots/SettingsMenu.png)
+![Example 1](.github/screenshots/Example1.jpg)
 
-## Example 1
+![Example 2](.github/screenshots/Example2.jpg)
 
-![Example 1](screenshots/Example1.jpg)
+## Settings
 
-This example uses no bluriness and default input area contrast.
-
-## Example 2
-
-![Example 2](screenshots/Example2.jpg)
-
-This example uses high degree of bluriness, with no input area contrast.
+![Settings](.github/screenshots/SettingsMenu.png)
