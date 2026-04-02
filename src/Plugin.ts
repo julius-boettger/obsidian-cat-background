@@ -16,8 +16,8 @@ interface PluginSettings {
 
 export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	cat: "face",
-	localImageLocation: false,
-	imageLocation: '',
+	localImageLocation: true,
+	imageLocation: '.obsidian/plugins/cat-background/cats/face-lines.svg',
 	opacity: 0.3,
 	imageSize: 10,
 	bluriness: 'low',

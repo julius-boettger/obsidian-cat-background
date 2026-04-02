@@ -66,7 +66,7 @@ export class SettingsTab extends PluginSettingTab {
 									filename = "stretching-lines";
 									break;
 							}
-							this.plugin.settings.imageLocation = `.obsidian/plugins/obsidian/cats/${filename}.svg`;
+							this.plugin.settings.imageLocation = `.obsidian/plugins/cat-background/cats/${filename}.svg`;
 						}
 						await this.plugin.saveSettings();
 						this.display(); // for potentially adjusted settings
