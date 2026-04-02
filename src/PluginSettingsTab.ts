@@ -1,5 +1,5 @@
 import BackgroundPlugin, { DEFAULT_SETTINGS } from './Plugin';
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting, Notice } from 'obsidian';
 
 const blurLevels = {
 	off: '0px',
@@ -108,6 +108,34 @@ export class SettingsTab extends PluginSettingTab {
 					});
 				});
 		}
+
+		new Setting(containerEl)
+			.setName('Image Size')
+			.setDesc(
+				'Size of the background image in percent. Values like 0.5 are also possible.',
+			)
+			.addText((text) => {
+				text.setPlaceholder(
+					`${DEFAULT_SETTINGS.imageSize}`,
+				).setValue(
+					`${this.plugin.settings.imageSize}`,
+				);
+				text.inputEl.addEventListener('blur', async () => {
+					const value = Number(text.getValue());
+					if (value >= 0) {
+						this.plugin.settings.imageSize = value;
+						await this.plugin.saveSettings();
+					} else if (value < 0) {
+						new Notice(
+							`Obsidian Background Image: Error: Image size ${value} is negative, it has to be positive`,
+						);
+					} else {
+						new Notice(
+							`Obsidian Background Image: Error: Image size "${value}" is not a number`,
+						);
+					}
+				});
+			});
 
 		new Setting(containerEl)
 			.setName('Background Opacity')

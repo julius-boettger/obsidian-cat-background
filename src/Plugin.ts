@@ -6,6 +6,7 @@ import { Notice } from 'obsidian';
 interface PluginSettings {
 	useLocal: boolean; // whether to use local file (true) or remote URL
 	imageLocation: string; // path to file or URL
+	imageSize: number; // in percent
 	opacity: number;
 	bluriness: string;
 	inputContrast: boolean;
@@ -16,6 +17,7 @@ export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	useLocal: false,
 	imageLocation: '',
 	opacity: 0.3,
+	imageSize: 10,
 	bluriness: 'low',
 	inputContrast: false,
 	position: 'center',
@@ -127,7 +129,7 @@ export default class BackgroundPlugin extends Plugin {
 		);
 		doc.body.style.setProperty(
 			'--obsidian-editor-background-image-size',
-			'10%', // TODO: add setting for this
+			`${this.settings.imageSize}%`,
 		);
 		doc.body.style.setProperty(
 			'--obsidian-editor-background-opacity',
