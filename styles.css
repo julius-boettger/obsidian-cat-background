@@ -3,24 +3,24 @@
 	content: '';
 	background-blend-mode: overlay;
 	background-repeat: repeat;
-	background-position: var(--obsidian-editor-background-position);
-	background-size: var(--obsidian-editor-background-image-size);
+	background-position: var(--cat-background-position);
+	background-size: var(--cat-background-image-size);
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	background-image: var(--obsidian-editor-background-image);
-	opacity: var(--obsidian-editor-background-opacity);
-	filter: var(--obsidian-editor-background-bluriness);
+	background-image: var(--cat-background-image);
+	opacity: var(--cat-background-opacity);
+	filter: var(--cat-background-bluriness);
 }
 
 .markdown-reading-view,
 .cm-editor .cm-contentContainer {
-	background: var(--obsidian-editor-background-input-contrast);
+	background: var(--cat-background-input-contrast);
 }
 
 .cm-editor .cm-contentContainer {
-	padding-left: var(--obsidian-editor-background-line-padding);
-	padding-right: var(--obsidian-editor-background-line-padding);
+	padding-left: var(--cat-background-line-padding);
+	padding-right: var(--cat-background-line-padding);
 }
 
 /* This sets the background for the whole app, seen with a positive z-index. However, the z-index disrupts interactions.
@@ -28,22 +28,22 @@
 	content: "";
 	background-blend-mode: overlay;
 	background-repeat: no-repeat;
-	background-position: var(--obsidian-editor-background-position);
+	background-position: var(--cat-background-position);
 	background-size: cover;
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	background-image: var(--obsidian-editor-background-image);
-	opacity: var(--obsidian-editor-background-opacity);
-	filter: var(--obsidian-editor-background-bluriness);
+	background-image: var(--cat-background-image);
+	opacity: var(--cat-background-opacity);
+	filter: var(--cat-background-bluriness);
 }
 
 .horizontal-main-container {
-	background: var(--obsidian-editor-background-input-contrast);
+	background: var(--cat-background-input-contrast);
 }
 .markdown-reading-view,
 .cm-editor .cm-contentContainer {
-    padding-left: var(--obsidian-editor-background-line-padding);
-    padding-right: var(--obsidian-editor-background-line-padding);
+    padding-left: var(--cat-background-line-padding);
+    padding-right: var(--cat-background-line-padding);
 }
 */

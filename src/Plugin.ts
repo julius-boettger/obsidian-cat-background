@@ -66,17 +66,17 @@ export default class BackgroundPlugin extends Plugin {
 		}
 
 		const doc = document;
-		doc.body.style.removeProperty('--obsidian-editor-background-image');
-		doc.body.style.removeProperty('--obsidian-editor-background-image-size');
-		doc.body.style.removeProperty('--obsidian-editor-background-opacity');
-		doc.body.style.removeProperty('--obsidian-editor-background-bluriness');
+		doc.body.style.removeProperty('--cat-background-image');
+		doc.body.style.removeProperty('--cat-background-image-size');
+		doc.body.style.removeProperty('--cat-background-opacity');
+		doc.body.style.removeProperty('--cat-background-bluriness');
 		doc.body.style.removeProperty(
-			'--obsidian-editor-background-input-contrast',
+			'--cat-background-input-contrast',
 		);
 		doc.body.style.removeProperty(
-			'--obsidian-editor-background-line-padding',
+			'--cat-background-line-padding',
 		);
-		doc.body.style.removeProperty('--obsidian-editor-background-position');
+		doc.body.style.removeProperty('--cat-background-position');
 	}
 
 	private prevResult: URLResult | null = null;
@@ -141,7 +141,7 @@ export default class BackgroundPlugin extends Plugin {
 			this.prevResult = result;
 			if (result.error) {
 				doc.body.style.setProperty(
-					'--obsidian-editor-background-image',
+					'--cat-background-image',
 					'none',
 				);
 				return;
@@ -151,31 +151,31 @@ export default class BackgroundPlugin extends Plugin {
 		}
 
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-image',
+			'--cat-background-image',
 			`url('${imageUrl}')`,
 		);
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-image-size',
+			'--cat-background-image-size',
 			`${this.settings.imageSize}%`,
 		);
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-opacity',
+			'--cat-background-opacity',
 			`${this.settings.opacity}`,
 		);
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-bluriness',
+			'--cat-background-bluriness',
 			`blur(${this.settings.bluriness})`,
 		);
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-input-contrast',
+			'--cat-background-input-contrast',
 			this.settings.inputContrast ? '#ffffff17' : 'none',
 		);
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-line-padding',
+			'--cat-background-line-padding',
 			this.settings.inputContrast ? '1rem' : '0',
 		);
 		doc.body.style.setProperty(
-			'--obsidian-editor-background-position',
+			'--cat-background-position',
 			this.settings.position,
 		);
 	}
