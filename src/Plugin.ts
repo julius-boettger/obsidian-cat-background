@@ -127,7 +127,6 @@ export default class BackgroundPlugin extends Plugin {
 				.replace(/[\r\n]/g, '')
 				.replace(/#/g, '%23');
 			imageUrl = "data:image/svg+xml," + sanitizedSvgString;
-			console.log(imageUrl);
 		} else {
 			const result = await this.resolveImage();
 
