@@ -15,7 +15,7 @@ const positionOptions = {
 	left: 'left',
 };
 
-const catOptions = {
+export const catOptions = {
 	face: 'face',
 	silhouette: 'silhouette',
 	stretching: 'stretching',
@@ -56,18 +56,16 @@ export class SettingsTab extends PluginSettingTab {
 							// TODO: handle static paths to preconfigured cats
 							let filename;
 							switch (this.plugin.settings.cat) {
-								case "face":
+								case catOptions.face:
 									filename = "face-lines";
 									break;
-								case "silhouette":
+								case catOptions.silhouette:
 									filename = "silhouette-filled";
 									break;
-								case "stretching":
+								case catOptions.stretching:
 									filename = "stretching-lines";
 									break;
 							}
-							this.plugin.settings.localImageLocation = true;
-							this.plugin.settings.imageLocation = `.obsidian/plugins/cat-background/cats/${filename}.svg`;
 						}
 						await this.plugin.saveSettings();
 						this.display(); // for potentially adjusted settings

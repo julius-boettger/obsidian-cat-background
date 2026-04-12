@@ -99,7 +99,22 @@ function copyToVaultPlugin() {
 	};
 }
 
-const plugins = !prod ? [copyToVaultPlugin()] : [];
+// bundle svg files
+function svgLoaderPlugin() {
+	return {
+		name: 'svg-loader',
+		setup(build) {
+			build.onLoad({ filter: /\.svg$/ }, async (args) => {
+				return {
+					contents: `export default ${JSON.stringify(readFileSync(args.path, 'utf8'))}`,
+					loader: 'js',
+				};
+			});
+		},
+	};
+}
+
+const plugins = !prod ? [copyToVaultPlugin(), svgLoaderPlugin()] : [svgLoaderPlugin()];
 const context = await esbuild.context({
 	banner: {
 		js: banner,

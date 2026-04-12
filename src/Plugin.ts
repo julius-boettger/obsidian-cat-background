@@ -1,7 +1,11 @@
 import { Plugin, WorkspaceWindow } from 'obsidian';
-import { SettingsTab } from './PluginSettingsTab';
+import { SettingsTab, catOptions } from './PluginSettingsTab';
 import { resolveLocal, resolveRemote, URLResult } from './Validation';
 import { Notice } from 'obsidian';
+
+import catSvgFace from "../cats/face-lines.svg";
+import catSvgSilhouette from "../cats/silhouette-filled.svg";
+import catSvgStretching from "../cats/stretching-lines.svg";
 
 interface PluginSettings {
 	cat: string, // cat to use as background image
@@ -17,7 +21,7 @@ interface PluginSettings {
 export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	cat: "face",
 	localImageLocation: true,
-	imageLocation: '.obsidian/plugins/cat-background/cats/face-lines.svg',
+	imageLocation: '',
 	opacity: 0.2,
 	imageSize: 10,
 	bluriness: 'off',
@@ -103,27 +107,52 @@ export default class BackgroundPlugin extends Plugin {
 	}
 
 	async updateBackground(doc: Document = activeDocument) {
-		const result = await this.resolveImage();
+		let imageUrl;
+		if (this.settings.cat != catOptions.custom) {
+			// use bundled svg cat
+			let svgString = "";
+			switch (this.settings.cat) {
+				case catOptions.face:
+					svgString = catSvgFace;
+					break;
+				case catOptions.silhouette:
+					svgString = catSvgSilhouette;
+					break;
+				case catOptions.stretching:
+					svgString = catSvgStretching;
+					break;
+			}
+			
+			const sanitizedSvgString = svgString
+				.replace(/[\r\n]/g, '')
+				.replace(/#/g, '%23');
+			imageUrl = "data:image/svg+xml," + sanitizedSvgString;
+			console.log(imageUrl);
+		} else {
+			const result = await this.resolveImage();
 
-		const prevLoc = this.prevResult?.location ?? null;
-		const nextLoc = result.location;
-		if (this.isBlob(prevLoc) && prevLoc !== nextLoc) {
-			URL.revokeObjectURL(prevLoc);
-		}
+			const prevLoc = this.prevResult?.location ?? null;
+			const nextLoc = result.location;
+			if (this.isBlob(prevLoc) && prevLoc !== nextLoc) {
+				URL.revokeObjectURL(prevLoc);
+			}
 
-		this.sendNotice(result);
-		this.prevResult = result;
-		if (result.error) {
-			doc.body.style.setProperty(
-				'--obsidian-editor-background-image',
-				'none',
-			);
-			return;
+			this.sendNotice(result);
+			this.prevResult = result;
+			if (result.error) {
+				doc.body.style.setProperty(
+					'--obsidian-editor-background-image',
+					'none',
+				);
+				return;
+			}
+
+			imageUrl = result.location;
 		}
 
 		doc.body.style.setProperty(
 			'--obsidian-editor-background-image',
-			`url("${result.location}")`,
+			`url('${imageUrl}')`,
 		);
 		doc.body.style.setProperty(
 			'--obsidian-editor-background-image-size',
