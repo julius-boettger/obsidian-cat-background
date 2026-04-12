@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-cat-background",
 	"version": "1.0.0",
-	"description": "This allows you to specify a remote URL as the background image, and an opacity percentage for the background image.",
+	"description": "Have a pattern of cats as your Obsidian background!",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
@@ -13,9 +13,9 @@
 		"plugin",
 		"background",
 		"image",
-		"opacity, remote url"
+		"cat"
 	],
-	"author": "shmolf",
+	"author": "Julius Böttger",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",
