@@ -11,7 +11,7 @@ interface PluginSettings {
 	cat: string, // cat to use as background image
 	localImageLocation: boolean; // whether to use local file (true) or remote URL
 	imageLocation: string; // path to file or URL
-	imageSize: number; // in percent
+	imageSize: number; // in em
 	opacity: number;
 	bluriness: string;
 	inputContrast: boolean;
@@ -155,7 +155,7 @@ export default class BackgroundPlugin extends Plugin {
 		);
 		doc.body.style.setProperty(
 			'--cat-background-image-size',
-			`${this.settings.imageSize}%`,
+			`${this.settings.imageSize}em`,
 		);
 		doc.body.style.setProperty(
 			'--cat-background-opacity',

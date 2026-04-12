@@ -127,7 +127,7 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName('Cat Size')
 			.setDesc(
-				'Size of cat(s) in percent. Values like 0.5 are also possible.',
+				'Size of cat(s). Values like 10.5 are also possible.',
 			)
 			.addText((text) => {
 				text.setPlaceholder(
@@ -138,16 +138,12 @@ export class SettingsTab extends PluginSettingTab {
 				// update settings when user clicks off
 				text.inputEl.addEventListener('blur', async () => {
 					const value = Number(text.getValue());
-					if (value >= 0) {
+					if (value > 0) {
 						this.plugin.settings.imageSize = value;
 						await this.plugin.saveSettings();
-					} else if (value < 0) {
-						new Notice(
-							`Cat Background: Error: Cat size ${value} is negative, it has to be positive`,
-						);
 					} else {
 						new Notice(
-							`Cat Background: Error: Cat size "${value}" is not a number`,
+							`Cat Background: Error: Cat size ${value} is invalid`,
 						);
 					}
 				});
