@@ -1,7 +1,65 @@
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier"> <path d="M271.307 256.142C299.066 225.436 258.936 221.137 255.999 212.214C255.498 210.686 259.33 188.96 257.701 188.96C245.635 188.96 229.733 234.131 199.012 221.69C169.921 209.906 169.203 161.748 138.623 148.478C61.9259 115.192 88.7822 268.726 96.0932 298.343" stroke="#ffffff" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/> <path d="M314 305.612C280.935 311.977 243.429 267.9 233.906 265.702C225.29 263.712 134.948 311.785 93.5223 199.469" stroke="#ffffff" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/> <path d="M97.3463 154.616C141.211 4.23541 220.11 186.05 236.719 145.911" stroke="#ffffff" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/> </g>
-</svg>
+
+<svg
+   width="488.88342"
+   height="456.61737"
+   viewBox="0 0 244.44171 228.30869"
+   fill="none"
+   stroke="#ffffff"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="stretching-lines.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="244.44171"
+       height="228.30869"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     id="SVGRepo_iconCarrier"
+     transform="translate(-77.558289,-85.970854)">
+    <path
+       d="m 271.307,256.142 c 27.759,-30.706 -12.371,-35.005 -15.308,-43.928 -0.501,-1.528 3.331,-23.254 1.702,-23.254 -12.066,0 -27.968,45.171 -58.689,32.73 C 169.921,209.906 169.203,161.748 138.623,148.478 61.9259,115.192 88.7822,268.726 96.0932,298.343"
+       stroke="#ffffff"
+       stroke-opacity="0.9"
+       stroke-width="16"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path1" />
+    <path
+       d="m 314,305.612 c -33.065,6.365 -70.571,-37.712 -80.094,-39.91 -8.616,-1.99 -98.958,46.083 -140.3837,-66.233"
+       stroke="#ffffff"
+       stroke-opacity="0.9"
+       stroke-width="16"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path2" />
+    <path
+       d="M 97.3463,154.616 C 141.211,4.23541 220.11,186.05 236.719,145.911"
+       stroke="#ffffff"
+       stroke-opacity="0.9"
+       stroke-width="16"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path3" />
+  </g>
+</svg>
