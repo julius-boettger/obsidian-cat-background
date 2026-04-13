@@ -3,7 +3,7 @@
 	content: '';
 	background-blend-mode: overlay;
 	background-repeat: repeat;
-	background-position: var(--cat-background-position);
+	background-position: center;
 	background-size: var(--cat-background-image-size);
 	width: 100%;
 	height: 100%;

@@ -16,7 +16,6 @@ interface PluginSettings {
 	opacity: number;
 	bluriness: string;
 	inputContrast: boolean;
-	position: string;
 }
 
 export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
@@ -28,7 +27,6 @@ export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	imageSpacing: 100,
 	bluriness: 'off',
 	inputContrast: false,
-	position: 'center',
 };
 
 export default class BackgroundPlugin extends Plugin {
@@ -78,7 +76,6 @@ export default class BackgroundPlugin extends Plugin {
 		doc.body.style.removeProperty(
 			'--cat-background-line-padding',
 		);
-		doc.body.style.removeProperty('--cat-background-position');
 	}
 
 	private prevResult: URLResult | null = null;
@@ -192,10 +189,6 @@ export default class BackgroundPlugin extends Plugin {
 		doc.body.style.setProperty(
 			'--cat-background-line-padding',
 			this.settings.inputContrast ? '1rem' : '0',
-		);
-		doc.body.style.setProperty(
-			'--cat-background-position',
-			this.settings.position,
 		);
 	}
 }

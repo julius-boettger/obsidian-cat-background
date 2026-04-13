@@ -7,14 +7,6 @@ const blurLevels = {
 	high: '15px',
 };
 
-const positionOptions = {
-	center: 'center',
-	top: 'top',
-	right: 'right',
-	bottom: 'bottom',
-	left: 'left',
-};
-
 export const catOptions = {
 	face: 'face',
 	silhouette: 'silhouette',
@@ -218,23 +210,6 @@ export class SettingsTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.inputContrast)
 					.onChange(async (value) => {
 						this.plugin.settings.inputContrast = value;
-						await this.plugin.saveSettings();
-					});
-			});
-
-		new Setting(containerEl)
-			.setName('Cat Alignment')
-			.setDesc(
-				"How to align your cat(s). Probably doesn't do much.",
-			)
-			.addDropdown((dropdown) => {
-				Object.entries(positionOptions).forEach(([key, value]) =>
-					dropdown.addOption(key, value),
-				);
-				dropdown
-					.setValue(this.plugin.settings.position)
-					.onChange(async (value) => {
-						this.plugin.settings.position = value;
 						await this.plugin.saveSettings();
 					});
 			});
