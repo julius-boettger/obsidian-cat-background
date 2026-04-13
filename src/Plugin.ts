@@ -12,6 +12,7 @@ interface PluginSettings {
 	localImageLocation: boolean; // whether to use local file (true) or remote URL
 	imageLocation: string; // path to file or URL
 	imageSize: number; // in em
+	imageSpacing: number, // in svg viewport units (actual number)
 	opacity: number;
 	bluriness: string;
 	inputContrast: boolean;
@@ -24,6 +25,7 @@ export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	imageLocation: '',
 	opacity: 0.2,
 	imageSize: 10,
+	imageSpacing: 0,
 	bluriness: 'off',
 	inputContrast: false,
 	position: 'center',
@@ -123,9 +125,20 @@ export default class BackgroundPlugin extends Plugin {
 					break;
 			}
 			
-			const sanitizedSvgString = svgString
+			let sanitizedSvgString = svgString
 				.replace(/[\r\n]/g, '')
 				.replace(/#/g, '%23');
+
+			const viewBoxPattern = /viewBox="([\d.-]+) ([\d.-]+) ([\d.-]+) ([\d.-]+)"/;
+			const viewBoxMatch = sanitizedSvgString.match(viewBoxPattern);
+			if (viewBoxMatch) {
+				const offset = this.settings.imageSpacing;
+				const [, xS, yS, wS, hS] = viewBoxMatch;
+				const [x, y, w, h] = [xS, yS, wS, hS].map(Number);
+				sanitizedSvgString = sanitizedSvgString.replace(viewBoxPattern,
+					`viewBox="${x-offset} ${y-offset} ${w+(2*offset)} ${h+(2*offset)}"`);
+			}
+
 			imageUrl = "data:image/svg+xml," + sanitizedSvgString;
 		} else {
 			const result = await this.resolveImage();

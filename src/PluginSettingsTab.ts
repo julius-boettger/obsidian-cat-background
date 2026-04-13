@@ -122,6 +122,31 @@ export class SettingsTab extends PluginSettingTab {
 						});
 					});
 			}
+		} else {
+			new Setting(containerEl)
+				.setName('Cat Spacing')
+				.setDesc(
+					'Spacing between cats (relative to cat size). Values like 10.5 are also possible.',
+				)
+				.addText((text) => {
+					text.setPlaceholder(
+						`${DEFAULT_SETTINGS.imageSpacing}`,
+					).setValue(
+						`${this.plugin.settings.imageSpacing}`,
+					);
+					// update settings when user clicks off
+					text.inputEl.addEventListener('blur', async () => {
+						const value = Number(text.getValue());
+						if (value >= 0) {
+							this.plugin.settings.imageSpacing = value;
+							await this.plugin.saveSettings();
+						} else {
+							new Notice(
+								`Cat Background: Error: Cat spacing ${value} is invalid`,
+							);
+						}
+					});
+				});
 		}
 
 		new Setting(containerEl)
