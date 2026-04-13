@@ -1,12 +1,6 @@
 import BackgroundPlugin, { DEFAULT_SETTINGS } from './Plugin';
 import { App, PluginSettingTab, Setting, Notice } from 'obsidian';
 
-const blurLevels = {
-	off: '0px',
-	low: '5px',
-	high: '15px',
-};
-
 export const catOptions = {
 	face: 'face',
 	silhouette: 'silhouette',
@@ -144,7 +138,7 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName('Cat Size')
 			.setDesc(
-				'Size of cat(s). Values like 10.5 are also possible.',
+				'Size of cats. Values like 10.5 are also possible.',
 			)
 			.addText((text) => {
 				text.setPlaceholder(
@@ -169,7 +163,7 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName('Cat Opacity')
 			.setDesc(
-				'Opacity of cat(s) in percent. Values like 10.5 are also possible.',
+				'Opacity of cats in percent. Values like 10.5 are also possible.',
 			)
 			.addText((text) => {
 				text.setPlaceholder(
@@ -187,17 +181,25 @@ export class SettingsTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Cat Bluriness')
-			.setDesc('Blurring your cat(s) may improve legibility.')
-			.addDropdown((dropdown) => {
-				dropdown
-					.addOption(blurLevels.off, 'Off')
-					.addOption(blurLevels.low, 'Low')
-					.addOption(blurLevels.high, 'High')
-					.setValue(this.plugin.settings.bluriness)
-					.onChange(async (value) => {
+			.setDesc('Blurring your cats may improve legibility. Valules like 0.5 are also possible.')
+			.addText((text) => {
+				text.setPlaceholder(
+					`${DEFAULT_SETTINGS.bluriness}`,
+				).setValue(
+					`${this.plugin.settings.bluriness}`,
+				);
+				// update settings when user clicks off
+				text.inputEl.addEventListener('blur', async () => {
+					const value = Number(text.getValue());
+					if (value >= 0) {
 						this.plugin.settings.bluriness = value;
 						await this.plugin.saveSettings();
-					});
+					} else {
+						new Notice(
+							`Cat Background: Error: Cat bluriness ${value} is invalid`,
+						);
+					}
+				});
 			});
 
 		new Setting(containerEl)

@@ -13,8 +13,8 @@ interface PluginSettings {
 	imageLocation: string; // path to file or URL
 	imageSize: number; // in em
 	imageSpacing: number, // in percent of image size
-	opacity: number;
-	bluriness: string;
+	opacity: number; // in percent
+	bluriness: number; // in pixels
 	inputContrast: boolean;
 }
 
@@ -25,7 +25,7 @@ export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	opacity: 0.2,
 	imageSize: 10,
 	imageSpacing: 100,
-	bluriness: 'off',
+	bluriness: 0,
 	inputContrast: false,
 };
 
@@ -180,7 +180,7 @@ export default class BackgroundPlugin extends Plugin {
 		);
 		doc.body.style.setProperty(
 			'--cat-background-bluriness',
-			`blur(${this.settings.bluriness})`,
+			`blur(${this.settings.bluriness}px)`,
 		);
 		doc.body.style.setProperty(
 			'--cat-background-input-contrast',
