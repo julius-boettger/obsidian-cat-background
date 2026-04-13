@@ -126,7 +126,7 @@ export class SettingsTab extends PluginSettingTab {
 			new Setting(containerEl)
 				.setName('Cat Spacing')
 				.setDesc(
-					'Spacing between cats (relative to cat size). Values like 10.5 are also possible.',
+					'Spacing between cats in percent of cat size, e.g. 100 for one cat space between cats. Values like 10.5 are also possible.',
 				)
 				.addText((text) => {
 					text.setPlaceholder(
@@ -177,7 +177,7 @@ export class SettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName('Cat Opacity')
 			.setDesc(
-				'Opacity of cat(s) in percent. Values like 0.5 are also possible.',
+				'Opacity of cat(s) in percent. Values like 10.5 are also possible.',
 			)
 			.addText((text) => {
 				text.setPlaceholder(

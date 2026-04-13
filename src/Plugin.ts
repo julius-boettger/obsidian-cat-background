@@ -12,7 +12,7 @@ interface PluginSettings {
 	localImageLocation: boolean; // whether to use local file (true) or remote URL
 	imageLocation: string; // path to file or URL
 	imageSize: number; // in em
-	imageSpacing: number, // in svg viewport units (actual number)
+	imageSpacing: number, // in percent of image size
 	opacity: number;
 	bluriness: string;
 	inputContrast: boolean;
@@ -25,7 +25,7 @@ export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	imageLocation: '',
 	opacity: 0.2,
 	imageSize: 10,
-	imageSpacing: 0,
+	imageSpacing: 100,
 	bluriness: 'off',
 	inputContrast: false,
 	position: 'center',
@@ -132,11 +132,18 @@ export default class BackgroundPlugin extends Plugin {
 			const viewBoxPattern = /viewBox="([\d.-]+) ([\d.-]+) ([\d.-]+) ([\d.-]+)"/;
 			const viewBoxMatch = sanitizedSvgString.match(viewBoxPattern);
 			if (viewBoxMatch) {
-				const offset = this.settings.imageSpacing;
 				const [, xS, yS, wS, hS] = viewBoxMatch;
 				const [x, y, w, h] = [xS, yS, wS, hS].map(Number);
+
+				// /100 for percent, /2 for more visual values like
+				// "100% for one cat size space between cats"
+				const offset = this.settings.imageSpacing / 100 / 2;
+				// relative to viewbox width and height
+				const xOff = w * offset;
+				const yOff = h * offset;
+
 				sanitizedSvgString = sanitizedSvgString.replace(viewBoxPattern,
-					`viewBox="${x-offset} ${y-offset} ${w+(2*offset)} ${h+(2*offset)}"`);
+					`viewBox="${x-xOff} ${y-yOff} ${w+(2*xOff)} ${h+(2*yOff)}"`);
 			}
 
 			imageUrl = "data:image/svg+xml," + sanitizedSvgString;
