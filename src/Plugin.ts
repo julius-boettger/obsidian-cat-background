@@ -22,7 +22,7 @@ export const DEFAULT_SETTINGS: Partial<PluginSettings> = {
 	cat: "face",
 	localImageLocation: true,
 	imageLocation: '',
-	opacity: 0.2,
+	opacity: 0.1,
 	imageSize: 10,
 	imageSpacing: 100,
 	bluriness: 0,
