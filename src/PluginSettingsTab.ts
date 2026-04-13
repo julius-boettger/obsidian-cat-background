@@ -20,12 +20,7 @@ export class SettingsTab extends PluginSettingTab {
 		const { containerEl } = this;
 
 		containerEl.empty();
-		containerEl.createEl('h1', { text: 'Cat Background' }); // Heading
-
-		const instructions = containerEl.createEl('div');
-		instructions.createEl('p', {
-			text: "Local cat background images must be stored in the Obsidian vault.",
-		});
+		containerEl.createEl('h2', { text: 'Cat Background - have a pattern of cats as your background!' });
 
 		new Setting(containerEl)
 			.setName('Cat')
