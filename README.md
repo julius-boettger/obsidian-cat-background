@@ -6,6 +6,17 @@ You can choose between a few shipped cats or even a custom cat image of your cho
 
 > Using the "custom" cat option, you could even choose an image without a cat 🤯 (but that's not intended)
 
+# Installation
+
+This plugin is not (yet) available for installation as a community plugin directly in Obsidian. You will have to:
+
+1. Grab the latest release `.zip` from [here](https://github.com/julius-boettger/obsidian-cat-background/releases)
+2. In your file explorer, navigate to your Obsidian vault, then to the `.obsidian` directory, then to the `plugins` directory
+    - If any of these directories don't exist yet, create them first
+3. Extract the downloaded `.zip` to the `plugins` directory
+    - `your-vault/.obsidian/plugins` should now contain a `cat-background` directory, containing some files
+4. In Obsidian, enable and configure the plugin
+
 # Examples
 
 ![Example with default settings](.github/screenshots/example-default.png)
